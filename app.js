@@ -32,7 +32,7 @@ app.use((req, res, next) => {
 app.use(
   "/",
   createProxyMiddleware({
-    target: "http://localhost:8388", // Shadowsocks server address
+    target: "http://0.0.0.0:8388", // Shadowsocks server address
     changeOrigin: true,
     onError: (err, req, res) => {
       console.error("Proxy error:", err);
