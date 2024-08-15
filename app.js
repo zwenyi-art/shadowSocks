@@ -76,6 +76,6 @@ server.on("error", (err) => {
 });
 
 // Start Shadowsocks server
-server.listen("127.0.0.1", 8388, () => {
+server.listen("0.0.0.0", 8388, () => {
   console.log("Shadowsocks server running on port 8388");
 });
