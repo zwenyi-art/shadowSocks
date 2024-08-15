@@ -34,6 +34,15 @@ app.use(
   createProxyMiddleware({
     target: "http://0.0.0.0:8388", // Shadowsocks server address
     changeOrigin: true,
+    onProxyReq: (proxyReq, req, res) => {
+      console.log(
+        `Proxying request to: ${proxyReq.protocol}//${proxyReq.host}${proxyReq.path}`
+      );
+      console.log(`Request method: ${req.method}, Request URL: ${req.url}`);
+    },
+    onProxyRes: (proxyRes, req, res) => {
+      console.log(`Received response from target: ${proxyRes.statusCode}`);
+    },
     onError: (err, req, res) => {
       console.error("Proxy error:", err);
       res.status(500).send("Proxy error");
