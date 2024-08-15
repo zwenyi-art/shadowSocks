@@ -27,12 +27,16 @@ app.use((req, res, next) => {
 
   next();
 });
+app.use((req, res, next) => {
+  console.log(`Incoming request: ${req.method} ${req.url}`);
+  next();
+});
 
 // Proxy middleware to forward requests to Shadowsocks server
 app.use(
   "/",
   createProxyMiddleware({
-    target: "http://0.0.0.0:8388", // Shadowsocks server address
+    target: "http://127.0.0.1:8080", // Shadowsocks server address
     changeOrigin: true,
     onProxyReq: (proxyReq, req, res) => {
       console.log(
