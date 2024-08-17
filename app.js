@@ -7,18 +7,7 @@ let clientLog = []; // Store log of connected clients
 
 // Function to log client connection
 function logClientConnection(clientIP, clientPort) {
-  const logEntry = {
-    clientIP,
-    clientPort,
-    connectedAt: new Date().toISOString(),
-  };
-  clientLog.push(logEntry);
-
-  // Write to a log file
-  fs.appendFileSync(
-    "client-connections.log",
-    `Connected: ${clientIP}:${clientPort} at ${logEntry.connectedAt}\n`
-  );
+  console.log(clientIP, clientPort);
 }
 
 // Function to log client disconnection
@@ -82,13 +71,15 @@ server.listen(8390, "0.0.0.0", () => {
 const app = express();
 
 app.get("/usage", (req, res) => {
+  console.log("User Hitted");
   res.json(clientDataUsage); // Return data usage for all clients based on ports
 });
 
 app.get("/clients", (req, res) => {
+  console.log("User clients");
   res.json(clientLog); // Return log of currently connected clients
 });
 
-app.listen(3000, () => {
+app.listen(5000, () => {
   console.log("Express server running on port 3000");
 });
