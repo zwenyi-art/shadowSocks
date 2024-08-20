@@ -1,17 +1,19 @@
 const express = require("express");
-
-// Create an Express.js API to manage and view data usage
 const app = express();
 
 app.get("/usage", (req, res) => {
   const shadowsocksURL =
     "ss://YWVzLTI1Ni1nY206cGFzc3dvcmQxMjM@206.206.77.119:8388#Testing%20";
+  const filename = "shadowsocks-url.txt";
 
-  res.json({
-    shadowsocksURL: shadowsocksURL,
-  });
+  // Set headers to indicate it's a text file and force download
+  res.setHeader("Content-Disposition", `attachment; filename="${filename}"`);
+  res.setHeader("Content-Type", "text/plain");
+
+  // Send the Shadowsocks URL as the file content
+  res.send(shadowsocksURL);
 });
 
 app.listen(5000, () => {
-  console.log("Express server running on port 3000");
+  console.log("Express server running on port 5000");
 });
